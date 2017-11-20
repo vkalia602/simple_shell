@@ -7,6 +7,8 @@ char **tokenizer(char *buffer)
 	int i = 0;
 
 	tokens = malloc(sizeof(char *) * 5);
+	if (tokens == NULL)
+		return (NULL);
         token = strtok(buffer, " \n\t");
 	while (token != NULL)
 	{
