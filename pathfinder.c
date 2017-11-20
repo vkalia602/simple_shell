@@ -3,16 +3,15 @@
 extern char **environ;
 char *findpath(void)
 {
-	char *token, *copy;
+	char *token = NULL, *copy = NULL;
 	char keyword[] = "PATH";
 	int i = 0;
 
 	while (environ[i] != NULL)
 	{
-		copy  = strdup(environ[i]);
+		copy  = _strdup(environ[i]);
 		if(copy == NULL)
 		{
-			free(copy);
 			return (NULL);
 		}
 		token = strtok(copy, "=");
@@ -22,21 +21,24 @@ char *findpath(void)
 			return (environ[i]);
 		}
 		i++;
+		free(copy);
 	}
 	free(copy);
 	return (NULL);
 }
 
-char *fix_token(char *argv, char *token)
+char *fix_token(char *args, char *token)
 {
-	char *new_token;
+	char *new_token = NULL;
 	int i = 0, j = 0, total_strlen = 0;
 
-	total_strlen = (strlen(argv)) + (strlen(token));
-	new_token = malloc(total_strlen * sizeof(char) + 2);
+	if(args == NULL || token == NULL)
+		return (NULL);
+
+	total_strlen = (_strlen(args)) + (_strlen(token));
+	new_token = malloc((total_strlen + 2) * sizeof(char *));
 	if (new_token == NULL)
 	{
-		free(new_token);
 		return (NULL);
 	}
 	while(token[i] != '\0')
@@ -45,9 +47,9 @@ char *fix_token(char *argv, char *token)
 		i++;
 	}
 	new_token[i] = '/';
-	while(argv[j] != '\0')
+	while(args[j] != '\0')
 	{
-		new_token[i + 1] = argv[j];
+		new_token[i + 1] = args[j];
 		j++;
 		i++;
 	}
@@ -57,17 +59,19 @@ char *fix_token(char *argv, char *token)
 
 char *pathfinder(char *args)
 {
-	char *dir;
-	char *token, *new_token, *holder_token;
+	char *dir = NULL;
+	char *token = NULL, *new_token = NULL, *holder_token = NULL;
 	struct stat st;
+	if (args == NULL)
+		return (NULL);
 
 	dir = findpath();
-	dir = strdup(dir);
+	if(dir == NULL)
+		return (NULL);
+	dir = _strdup(dir);
 	if (dir == NULL)
-	{
-		free(dir);
 		return(NULL);
-	}
+
 	token = strtok(dir, "=:");
 	while (token != NULL)
 	{
@@ -76,7 +80,6 @@ char *pathfinder(char *args)
 		if(new_token == NULL)
 		{
 			free(dir);
-			free(new_token);
 			return (NULL);
 		}
 		if(stat(new_token, &st) == 0)
@@ -85,7 +88,10 @@ char *pathfinder(char *args)
 			return (new_token);
 		}
 		token = strtok(NULL, "=:");
+		free(new_token);
 	}
 	free(dir);
+	free(new_token);
+
 	return (NULL);
 }
