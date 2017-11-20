@@ -2,8 +2,8 @@
 
 int main (void)
 {
-	char *buffer = NULL, **args;
-	size_t size;
+	char *buffer = NULL, **args = NULL;
+	size_t size = 0;
 	struct stat st;
 	int r;
 
@@ -14,24 +14,59 @@ int main (void)
 		{
 			free(buffer);
 			write(STDOUT_FILENO, "\n", 1);
+		}
+		buffer = getline_func(buffer, size);
+		if (buffer == NULL)
 			break;
-		}
 		args = tokenizer(buffer);
-		/*if (builtins(args) == -1)*/
-		if(stat(args[0], &st) == 0)
-		   r = run_command(args);
-		if(stat(args[0], &st) == -1)
+		if(args == NULL)
+			return (-1);
+		if (builtins(args, buffer) == -1)
 		{
-			args[0] = pathfinder(args[0]);
-			if(args[0] == NULL)
-				perror("pathfinder error");
-			else
+			if(stat(args[0], &st) == 0)
 				r = run_command(args);
-		}
+			else if(stat(args[0], &st) == -1)
+			{
+				args[0] = pathfinder(args[0]);
+					if(args[0] == NULL)
+						perror("Error");
+					else
+						r = run_command(args);
+			}
 		if (r == -1)
-			perror("error: command not found");
+			perror("Error:");
+
+		free(args);
+		args = NULL;
 		free(buffer);
 		buffer = NULL;
+		}
 	}
 	return (0);
+}
+
+void free_func(char **args)
+{
+	int i = 0;
+	if(args == NULL)
+		return;
+	while(args != NULL)
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
+char *getline_func(char *buffer, size_t size)
+{
+	int x;
+
+	x = getline(&buffer, &size, stdin);
+	if(x == 1 || x == -1 || buffer == NULL)
+	{
+		free(buffer);
+		return(NULL);
+	}
+	return(buffer);
 }
