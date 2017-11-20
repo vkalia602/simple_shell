@@ -13,16 +13,24 @@
  *
  * @form: format specifier
  * @f: function pointer
-
+ */
 typedef struct builtins
 {
-	char *form;
-	int (*f)(va_list);
-} built_t
-*/
+	char *name;
+	int (*func)(char **args, char *buffer);
+} bin;
 char *findpath(void);
-char *fix_token(char *argv, char *token);
-char *pathfinder(char *argv);
+char *fix_token(char *args, char *token);
+char *pathfinder(char *args);
 int run_command(char **args);
 char **tokenizer(char *buffer);
+int builtins(char **args, char *buffer);
+int printenv(char **args, char *buffer);
+int exitfunc(char **args, char *buffer);
+void free_func(char **args);
+char *getline_func(char *buffer, size_t size);
+int _strcmp(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+int _strlen(char *s);
 #endif
