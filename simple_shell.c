@@ -10,9 +10,10 @@ int main (void)
 	while (1)
 	{
 		write(STDOUT_FILENO, "s_hell$ ", 9);
-		if (getline(&buffer, &size, stdin) == -1)
+		if (getline(&buffer, &size, stdin) == EOF)
 		{
 			free(buffer);
+			write(STDOUT_FILENO, "\n", 1);
 			break;
 		}
 		args = tokenizer(buffer);
