@@ -10,11 +10,6 @@ int main (void)
 	while (1)
 	{
 		write(STDOUT_FILENO, "s_hell$ ", 9);
-		if (getline(&buffer, &size, stdin) == EOF)
-		{
-			free(buffer);
-			write(STDOUT_FILENO, "\n", 1);
-		}
 		buffer = getline_func(buffer, size);
 		if (buffer == NULL)
 			break;
@@ -63,10 +58,15 @@ char *getline_func(char *buffer, size_t size)
 	int x;
 
 	x = getline(&buffer, &size, stdin);
+	if (x  == EOF)
+	  {
+	    free(buffer);
+	    write(STDOUT_FILENO, "\n", 1);
+	  }
 	if(x == 1 || x == -1 || buffer == NULL)
-	{
-		free(buffer);
-		return(NULL);
-	}
+	  {
+	    free(buffer);
+	    return(NULL);
+	  }
 	return(buffer);
 }
