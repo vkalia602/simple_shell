@@ -1,0 +1,31 @@
+.TH SHELL 3 "20 November 2017" "v1.0" "Custom Shell Manual"
+.SH NAME
+s_hell - simple command line interpreter
+.SH SYNOPSIS
+.B s_hell
+.I COMMAND [OPTION(S)]
+
+.SH DESCRIPTION
+Run custom command line interpreter on top of a full shell environment
+
+.I COMMAND
+is read from user input, then interpreted and executed by the custom shell
+
+.I OPTION(S)
+refers to the various flags located in command line interpreter root system directories that allow the user to be more specific in their interactions with the command
+
+.B SHELL
+first is initiated on top of another shell environment, and the user is prompted to enter a command using s_hell$
+
+The command is read by the custom shell, then begins searching for builtin commands that share the same name as the inputted command
+
+If the command read is not found, custom shell searches PATH, which generally will be root directories, for the command in order to execute it
+
+In addition to arguments and options, the custom shell also has the ability to print the current working environment, as well as execute the builtin command exit()
+
+The custom shell is also capable of handling and printing error messages and re-entering the custom shell should the given command remains undiscovered 
+
+.SH BUGS
+Raided, squashed, and zapped
+.SH AUTHORS
+Sue-by Dooby Doo and Jerel the Parallel

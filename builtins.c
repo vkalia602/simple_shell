@@ -1,5 +1,15 @@
 #include "shell.h"
+
+
 extern char **environ;
+
+/**
+ * builtins - lists of builtin commands
+ *
+ * @args: arguments given
+ * @buffer: storage space
+ * Return: 0
+ */
 int builtins(char **args, char *buffer)
 {
 	int idx = 0;
@@ -8,7 +18,7 @@ int builtins(char **args, char *buffer)
 		{"exit", exitfunc},
 		{NULL, NULL}
 	};
-	if(args[0] == NULL)
+	if (args[0] == NULL)
 		return (-1);
 	while (bin_list[idx].name != NULL)
 	{
@@ -21,6 +31,13 @@ int builtins(char **args, char *buffer)
 	return (0);
 }
 
+/**
+ * printenv - function called to print env
+ *
+ * @args: arguments given
+ * @buffer: storage space
+ * Return: 0
+ */
 int printenv(char **args, char *buffer)
 {
 	int idx;
@@ -41,6 +58,12 @@ int printenv(char **args, char *buffer)
 	return (0);
 }
 
+/**
+ * exitfunc - function called to exit shell
+ *
+ * @args: arguments given
+ * @buffer: storage space
+ */
 int exitfunc(char **args, char *buffer)
 {
 	free(buffer);

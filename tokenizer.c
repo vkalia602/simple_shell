@@ -1,5 +1,12 @@
 #include "shell.h"
 
+
+/**
+ * tokenizer - parses strings into tokens
+ *
+ * @buffer: storage space
+ * Return: split tokens
+ */
 char **tokenizer(char *buffer)
 {
 	char **tokens;
@@ -9,7 +16,7 @@ char **tokenizer(char *buffer)
 	tokens = malloc(sizeof(char *) * 5);
 	if (tokens == NULL)
 		return (NULL);
-        token = strtok(buffer, " \n\t");
+	token = strtok(buffer, " \n\t");
 	while (token != NULL)
 	{
 		tokens[i] = token;

@@ -1,5 +1,12 @@
 #include "shell.h"
 
+
+/**
+ * run_command - executes given input
+ *
+ * @args: arguments given
+ * Return: 0
+ */
 int run_command(char **args)
 {
 	pid_t child_pid;
@@ -16,7 +23,7 @@ int run_command(char **args)
 	}
 	else if (child_pid == 0)
 	{
-		if(execve(args[0], args, NULL) == -1)
+		if (execve(args[0], args, NULL) == -1)
 			return (-1);
 	}
 	else
