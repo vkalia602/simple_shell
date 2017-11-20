@@ -16,11 +16,6 @@ int main(void)
 	while (1)
 	{
 		write(STDOUT_FILENO, "s_hell$ ", 9);
-		if (getline(&buffer, &size, stdin) == EOF)
-		{
-			free(buffer);
-			write(STDOUT_FILENO, "\n", 1);
-		}
 		buffer = getline_func(buffer, size);
 		if (buffer == NULL)
 			break;
@@ -81,6 +76,7 @@ char *getline_func(char *buffer, size_t size)
 	int x;
 
 	x = getline(&buffer, &size, stdin);
+<<<<<<< HEAD
 
 	if (x == 1 || x == -1 || buffer == NULL)
 	{
@@ -88,4 +84,17 @@ char *getline_func(char *buffer, size_t size)
 		return (NULL);
 	}
 	return (buffer);
+=======
+	if (x  == EOF)
+	  {
+	    free(buffer);
+	    write(STDOUT_FILENO, "\n", 1);
+	  }
+	if(x == 1 || x == -1 || buffer == NULL)
+	  {
+	    free(buffer);
+	    return(NULL);
+	  }
+	return(buffer);
+>>>>>>> 80a44c422738f37f792a132a30bab4c2de2b6ff2
 }
