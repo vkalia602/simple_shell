@@ -17,25 +17,25 @@ refers to the various flags located in command line interpreter root system dire
 .B SHELL
 first is initiated on top of another shell environment, and the user is prompted to enter a command using s_hell$
 
-The command is read by the custom shell, then begins searching for builtin commands that share the same name as the inputted command. If the command read is not found, custom shell searches PATH, which generally will be root directories, for the command in order to execute it. In addition to arguments and options, the custom shell also has the ability to print the current working environment, as well as execute the builtin command exit(). The custom shell is also capable of handling and printing error messages and re-entering the custom shell should the given command remains undiscovered.
+The command is read by the custom shell, then begins searching for builtin commands that share the same name as the input command. If the command read is not found, custom shell searches PATH, which generally will be root directories, for the command in order to execute it. In addition to arguments and options, the custom shell also has the ability to print the current working environment, as well as execute the builtin command exit(). The custom shell is also capable of handling and printing error messages and re-entering the original shell should the given command remain undiscovered.
 
 .SH EXAMPLE
 ./hsh
 .br
 .\&
-echo "qwerty"
+s_hell$ ls
 .br
 .\&
-qwerty
+main.c
 .br
 .\&
 s_hell$
 
 In this example, the custom shell executes command
-.I echo
-and the text afterwards to display the input
-.I qwerty
-on the user terminal.
+.I ls
+and a
+.I list
+of files within the directory are displayed on the user terminal.
 
 .SH BUILTIN COMMANDS
 .B ENV

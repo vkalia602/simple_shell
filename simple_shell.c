@@ -76,7 +76,6 @@ char *getline_func(char *buffer, size_t size)
 	int x;
 
 	x = getline(&buffer, &size, stdin);
-<<<<<<< HEAD
 
 	if (x == 1 || x == -1 || buffer == NULL)
 	{
@@ -84,7 +83,7 @@ char *getline_func(char *buffer, size_t size)
 		return (NULL);
 	}
 	return (buffer);
-=======
+
 	if (x  == EOF)
 	  {
 	    free(buffer);
@@ -96,5 +95,4 @@ char *getline_func(char *buffer, size_t size)
 	    return(NULL);
 	  }
 	return(buffer);
->>>>>>> 80a44c422738f37f792a132a30bab4c2de2b6ff2
 }
