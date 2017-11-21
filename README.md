@@ -1,47 +1,73 @@
-# simple_shell
-
 # Custom Shell
 
-A Shell Within a Shell
+This project is a simpler rendition of the actual SHELL which was built as a project in Holberton School.
 
 ## Getting Started
 
-First things first, you'll want to compile the C files
+This repository can be cloned using the https link given below.
+
+>https://github.com/vkalia602/simple_shell.git
+
+The executable of this repo was compiled using the following flags.
 
 > gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
-From there, you can enter the shell from any other shell environment using
+Using the -o flag, the executable program is renamed hsh and can be executed using >./hsh 
+command.
 
-> ./hsh
+### Repository Contents
 
-## Work It
+|  **File Name**  |   **Description**   |
+| --------------- | ------------------- |
+| builtins.c | This file consists functions like builtins, printenv, exitfunc and initialized struct for the built-ins |
+| pathfinder.c | File contains findpath, fix token, and pathfinder functions. |
+| run_command.c| File contains functions like run_command and getline_func |
+| shell.h| Library file for all the functions used in the project include the defined struct for the builtins.|
+| simple_shell.c | This file contains the main function which is the entry point for the arguments and contains function to print error messages.|
+| string_funcs.c | File contains string manipulations function like strcmp, strlen, strdup, strcpy and putchar. All the functions are custom made in C. |
+| tokenizer.c | File contains tokenizing function that parses string into tokens |
 
-The Custom Shell is capable of running both custom builtin commands and their optional flags, along with $PATH commands and their optional flags. You can make use of these commands the same way you would in any other shell environment.
+### List of Functions
+| Function Name | Description |
+|---------------- | -----------|
+|[findpath](https://github.com/vkalia602/simple_shell/blob/master/pathfinder.c)   | Searches the environment for PATH. |
+|[fix_token](https://github.com/vkalia602/simple_shell/blob/master/pathfinder.c) | Function concatenats directory with the input command. |
+|[pathfinder](https://github.com/vkalia602/simple_shell/blob/master/pathfinder.c) | Function finds the directory a command is located in and returns the command concatenated with the directory |
+|[builtins](https://github.com/vkalia602/simple_shell/blob/master/builtins.c) | Functions contains list of built-in commands and determines if the argument recieved is a built in. |
+|[printenv](https://github.com/vkalia602/simple_shell/blob/master/builtins.c) | Function prints the environment using the double pointer **environ global variable. |
+|[exitfunc](https://github.com/vkalia602/simple_shell/blob/master/builtins.c) | Function exits out of the shell. |
+|[run_command](https://github.com/vkalia602/simple_shell/blob/master/run_command.c) | Function creates a child process and executed the appropriate command |
+|[getline_func](https://github.com/vkalia602/simple_shell/blob/master/run_command.c) | Function uses getline function to read input from the user. | 
+|[_strcmp](https://github.com/vkalia602/simple_shell/blob/master/string_funcs.c) | Compares two strings |
+|[_strdup](https://github.com/vkalia602/simple_shell/blob/master/string_funcs.c) | Duplicates a string.|
+|[_strlen](https://github.com/vkalia602/simple_shell/blob/master/string_funcs.c) | Function returns length of a string. |
+|[_strcpy](https://github.com/vkalia602/simple_shell/blob/master/string_funcs.c) | Function copies string from source into destination and returns the string |
+|[_putchar](https://github.com/vkalia602/simple_shell/blob/master/string_funcs.c) | Writes a char to the stdout |
+|[tokenizer](https://github.com/vkalia602/simple_shell/blob/master/tokenizer.c) | Function parses the string into tokens. |
 
-Currently working builtin commands are
-
-> env
-
-> exit
-
-## Work It Harder
-
-Example of a custom shell success
+### Example
 
 ```
-s_hell$ echo "qwerty"
-qwerty
-s_hell$
+$ ./hsh
+shell$ ls -l
+total 40
+-rw-rw-r-- 1 vagrant vagrant 1098 Nov 20 22:09 builtins.c
+-rw-rw-r-- 1 vagrant vagrant 1323 Nov 20 22:26 man_page
+-rw-rw-r-- 1 vagrant vagrant 1936 Nov 20 23:53 pathfinder.c
+-rw-rw-r-- 1 vagrant vagrant 3813 Nov 21 04:21 #README.md#
+-rw-rw-r-- 1 vagrant vagrant 1804 Nov 21 03:47 README.md
+-rw-rw-r-- 1 vagrant vagrant  855 Nov 21 00:22 run_command.c
+-rw-rw-r-- 1 vagrant vagrant  902 Nov 20 23:41 shell.h
+-rw-rw-r-- 1 vagrant vagrant 1347 Nov 21 02:41 simple_shell.c
+-rw-rw-r-- 1 vagrant vagrant 1229 Nov 20 21:50 string_funcs.c
+-rw-rw-r-- 1 vagrant vagrant  444 Nov 20 22:16 tokenizer.c
+
+
 ```
+### Return Value
 
-Example of a custom shell error
+Shell will exit with a status of 0 on the >exit< command. On error, shell will print the error with a new command line.
 
-```
-s_hell$ echo "qwerty"
-qwerty: not found
-s_hell$
-```
+### Authors
 
-## Credit
-
-Credit goes to Vasudha (Sue!) Kalia and Jerel Henderson. You can find our repositories [@vkalia602](https://github.com/vkalia602) and [@jerelhenderson](https://github.com/jerelhenderson).
+Sue Kalia and Jerel Henderson
