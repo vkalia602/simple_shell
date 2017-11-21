@@ -17,15 +17,57 @@ refers to the various flags located in command line interpreter root system dire
 .B SHELL
 first is initiated on top of another shell environment, and the user is prompted to enter a command using s_hell$
 
-The command is read by the custom shell, then begins searching for builtin commands that share the same name as the inputted command
+The command is read by the custom shell, then begins searching for builtin commands that share the same name as the inputted command. If the command read is not found, custom shell searches PATH, which generally will be root directories, for the command in order to execute it. In addition to arguments and options, the custom shell also has the ability to print the current working environment, as well as execute the builtin command exit(). The custom shell is also capable of handling and printing error messages and re-entering the custom shell should the given command remains undiscovered.
 
-If the command read is not found, custom shell searches PATH, which generally will be root directories, for the command in order to execute it
+.SH EXAMPLE
+./hsh
+.br
+.\&
+echo "qwerty"
+.br
+.\&
+qwerty
+.br
+.\&
+s_hell$
 
-In addition to arguments and options, the custom shell also has the ability to print the current working environment, as well as execute the builtin command exit()
+In this example, the custom shell executes command
+.I echo
+and the text afterwards to display the input
+.I qwerty
+on the user terminal.
 
-The custom shell is also capable of handling and printing error messages and re-entering the custom shell should the given command remains undiscovered 
+.SH BUILTIN COMMANDS
+.B ENV
+- prints the custom shell environment
+.br
+.\&
+.B EXIT
+- exits the custom shell and returns to the host shell
+
+.SH RETURN VALUES
+Returns
+.B 0
+on success
+.br
+.\&
+Returns
+.B -1
+on failure
+
+.SH EXIT VALUE
+Exits with a
+.B 0
+value
 
 .SH BUGS
 Raided, squashed, and zapped
+
 .SH AUTHORS
 Sue-by Dooby Doo and Jerel the Parallel
+
+.SH SEE ALSO
+.I bash(1)
+.br
+.\&
+.I sh(1)
