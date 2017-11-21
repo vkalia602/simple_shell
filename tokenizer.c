@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+ * tokenizer - parses strings into tokens
+ *
+ * @buffer: storage space
+ * Return: split tokens
+ */
 char **tokenizer(char *buffer)
 {
 	char **tokens;

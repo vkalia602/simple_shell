@@ -1,21 +1,37 @@
 #include "shell.h"
-
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char c)
+{
+  return (write(1, &c, 1));
+}
+/**
+ * main - simple shell instance
+ *
+ * Return: 0
+ */
 int main (void)
 {
-	char *buffer = NULL, **args = NULL;
-	size_t size = 0;
+  char *buffer = NULL, **args = NULL, *real_arg = NULL;
+  size_t size = 0;
 	struct stat st;
-	int r;
+	int r = 0, i = 1;
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "s_hell$ ", 9);
+		write(STDOUT_FILENO, "shell$ ", 8);
 		buffer = getline_func(buffer, size);
 		if (buffer == NULL)
-			break;
+			continue;
 		args = tokenizer(buffer);
 		if(args == NULL)
 			return (-1);
+		real_arg = args[0];
 		if (builtins(args, buffer) == -1)
 		{
 			if(stat(args[0], &st) == 0)
@@ -24,13 +40,18 @@ int main (void)
 			{
 				args[0] = pathfinder(args[0]);
 					if(args[0] == NULL)
-						perror("Error");
-					else
-						r = run_command(args);
+					  {
+					    error_msg(real_arg, i);
+					    i++;
+					  }
+					  else
+					  r = run_command(args);
 			}
 		if (r == -1)
-			perror("Error:");
-
+		  {
+		    error_msg(real_arg, i);
+		    i++;
+		  }
 		free(args);
 		args = NULL;
 		free(buffer);
@@ -40,33 +61,12 @@ int main (void)
 	return (0);
 }
 
-void free_func(char **args)
+void error_msg(char *real_arg, int i)
 {
-	int i = 0;
-	if(args == NULL)
-		return;
-	while(args != NULL)
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
-}
-
-char *getline_func(char *buffer, size_t size)
-{
-	int x;
-
-	x = getline(&buffer, &size, stdin);
-	if (x  == EOF)
-	  {
-	    free(buffer);
-	    write(STDOUT_FILENO, "\n", 1);
-	  }
-	if(x == 1 || x == -1 || buffer == NULL)
-	  {
-	    free(buffer);
-	    return(NULL);
-	  }
-	return(buffer);
+  write(STDOUT_FILENO,real_arg, _strlen(real_arg));
+  write(STDOUT_FILENO,": ", 2);
+  _putchar(i + '0');
+  write(STDOUT_FILENO,": ", 2);
+  write(STDOUT_FILENO, "Not found",10);
+  _putchar('\n');  
 }

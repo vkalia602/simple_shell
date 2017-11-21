@@ -9,16 +9,17 @@
 #include <stdlib.h>
 #include <string.h>
 /**
- * struct printformat - Struct printformat
+ * struct builtins - Struct for built-ins
  *
- * @form: format specifier
- * @f: function pointer
+ * @name: name of the built-in
+ * @func: function pointer
  */
 typedef struct builtins
 {
 	char *name;
 	int (*func)(char **args, char *buffer);
 } bin;
+extern char **environ;
 char *findpath(void);
 char *fix_token(char *args, char *token);
 char *pathfinder(char *args);
