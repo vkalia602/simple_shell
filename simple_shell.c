@@ -47,7 +47,12 @@ int main(void)
 	}
 	return (0);
 }
-
+/**
+ * error_msg - Function that prints error messages
+ * @real_arg: user input command
+ * @i: Error iteration
+ * Return: void
+ */
 void error_msg(char *real_arg, int i)
 {
 	write(STDOUT_FILENO, real_arg, _strlen(real_arg));

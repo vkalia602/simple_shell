@@ -33,6 +33,7 @@ int run_command(char **args)
  *
  * @buffer: storage space for input
  * @size: size in bytes of input
+ * Return: Pointer to the buffer
  */
 char *getline_func(char *buffer, size_t size)
 {

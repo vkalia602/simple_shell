@@ -57,7 +57,8 @@ int printenv(char **args, char *buffer)
  *
  * @args: arguments given
  * @buffer: storage space
- */
+ * Return: 0 on success
+*/
 int exitfunc(char **args, char *buffer)
 {
 	free(buffer);
