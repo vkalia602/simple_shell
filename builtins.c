@@ -14,7 +14,7 @@ int builtins(char **args, char *buffer)
 		{"exit", exitfunc},
 		{NULL, NULL}
 	};
-	if(args[0] == NULL)
+	if (args[0] == NULL)
 		return (-1);
 	while (bin_list[idx].name != NULL)
 	{
