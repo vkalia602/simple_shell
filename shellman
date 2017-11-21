@@ -1,0 +1,73 @@
+.TH SHELL 3 "20 November 2017" "v1.0" "Custom Shell Manual"
+.SH NAME
+s_hell - simple command line interpreter
+.SH SYNOPSIS
+.B s_hell
+.I COMMAND [OPTION(S)]
+
+.SH DESCRIPTION
+Run custom command line interpreter on top of a full shell environment
+
+.I COMMAND
+is read from user input, then interpreted and executed by the custom shell
+
+.I OPTION(S)
+refers to the various flags located in command line interpreter root system directories that allow the user to be more specific in their interactions with the command
+
+.B SHELL
+first is initiated on top of another shell environment, and the user is prompted to enter a command using s_hell$
+
+The command is read by the custom shell, then begins searching for builtin commands that share the same name as the input command. If the command read is not found, custom shell searches PATH, which generally will be root directories, for the command in order to execute it. In addition to arguments and options, the custom shell also has the ability to print the current working environment, as well as execute the builtin command exit(). The custom shell is also capable of handling and printing error messages and re-entering the original shell should the given command remain undiscovered.
+
+.SH EXAMPLE
+./hsh
+.br
+.\&
+s_hell$ ls
+.br
+.\&
+main.c
+.br
+.\&
+s_hell$
+
+In this example, the custom shell executes command
+.I ls
+and a
+.I list
+of files within the directory are displayed on the user terminal.
+
+.SH BUILTIN COMMANDS
+.B ENV
+- prints the custom shell environment
+.br
+.\&
+.B EXIT
+- exits the custom shell and returns to the host shell
+
+.SH RETURN VALUES
+Returns
+.B 0
+on success
+.br
+.\&
+Returns
+.B -1
+on failure
+
+.SH EXIT VALUE
+Exits with a
+.B 0
+value
+
+.SH BUGS
+Raided, squashed, and zapped
+
+.SH AUTHORS
+Sue-by Dooby Doo and Jerel the Parallel
+
+.SH SEE ALSO
+.I bash(1)
+.br
+.\&
+.I sh(1)
