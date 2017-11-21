@@ -14,11 +14,11 @@ char **tokenizer(char *buffer)
 	tokens = malloc(sizeof(char *) * 5);
 	if (tokens == NULL)
 		return (NULL);
-        token = strtok(buffer, " \n\t");
+	token = strtok(buffer, "\n \t");
 	while (token != NULL)
 	{
 		tokens[i] = token;
-		token = strtok(NULL, " \n\t");
+		token = strtok(NULL, "\n \t");
 		i++;
 	}
 	tokens[i] = NULL;
