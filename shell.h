@@ -35,4 +35,5 @@ char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
 int _strlen(char *s);
 int _putchar(char c);
+void error_msg(char *real_arg, int i);
 #endif
